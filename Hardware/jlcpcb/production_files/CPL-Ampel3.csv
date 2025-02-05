@@ -1,0 +1,18 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+BZ1,Buzzer,Buzzer_12x9.5RM6.5,69.05,-63.97,-90.0,top
+D1,GP16,LED_D5.0mm,60.16,-81.75,90.0,top
+D2,GP17,LED_D5.0mm,60.16,-89.37,90.0,top
+D3,GP18,LED_D5.0mm,60.16,-96.99,90.0,top
+D4,GP19,LED_D5.0mm,67.78,-89.37,90.0,top
+D5,GP20,LED_D5.0mm,75.4,-81.75,90.0,top
+D6,GP21,LED_D5.0mm,75.4,-89.37,90.0,top
+D7,GP22,LED_D5.0mm,75.4,-96.99,90.0,top
+IC1,Magnetsensor,TO-92_Inline_Horizontal2_lötsicher,95.46,-90.64,-90.0,top
+Pico_L1,Conn_01x20_Socket,PinSocket_1x20_P2.54mm_Vertical,79.21,-55.08,-90.0,top
+Pico_R1,Conn_01x20_Socket,PinSocket_1x20_P2.54mm_Vertical,79.21,-72.86,-90.0,top
+R1,10k,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,89.37,-96.99,-90.0,top
+R2,10k,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,89.37,-83.02,-90.0,top
+R3,100,R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,77.94,-63.97,90.0,top
+RN1,330,R_Array_SIP8,84.29,-91.91,90.0,top
+SW1,Taster,SW_PUSH_6mm,96.99,-99.24,0.0,top
+T2,Lichtsensor,LED_D5.0mm_Clear,96.99,-81.75,90.0,top
