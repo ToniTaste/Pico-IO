@@ -1,8 +1,4 @@
 # Pico-IO
-Hardwarekomponente mit Raspberry Pico sowie Aktoren und Sensoren
-
-# Überblick
-
 Pico-IO ist eine Hardwarekomponente mit Sensoren und Aktoren. Sie
 besteht aus einem Raspberry Pico an dem sieben LED -- beispielsweise zur
 Anzeige von Ampeln oder eines Würfelergebnisses -- und ein
@@ -42,20 +38,14 @@ Version 1 und 2 des Pico (W)H verwendet werden.
 ![](Abb/image003.png)
 
 Pico-IO verfügt über drei Sensoren:
-
 - GPIO 26: Tastsensor Wertebereich: \[\< 10, 1023\]
-
-- GPIO 27: Magnetsensor Wertebereich: \[≈ 275 ... ≈ 825\], Normalwert:
-  ≈ 555
-
+- GPIO 27: Magnetsensor Wertebereich: \[≈ 275 ... ≈ 825\], Normalwert: ≈ 555
 - GPIO 28: Lichtsensor Wertebereich: \[\< 10 ... 1023\]
 
 ![](Abb/image004.png)
 
 Pico-IO besitzt acht Aktoren:
-
 - GPIO 16 ... 22: LED-Matrix
-
 - GPIO 15: Tonausgabe über Buzzer
 
 ![](Abb/image005.png)
@@ -64,38 +54,22 @@ Pico-IO besitzt acht Aktoren:
 
 ![](image006.jpg)
 
-  ------------------------------------------------------------------------------------------------------------------
+| Bauelement | Bezeichnung | Wert | Symbolbild |
+|------------|-------------|------|------------|
+|  LED              | D1 ... D7 |  2x rot, 2x gelb, 2x grün, 1x blau  | ![](Abb/image007.png) |
+|  Mikrotaster      | SW1       |  Kurzhubtaster 6x6                  | ![](Abb/image008.png) |
+|  Fototransistor   | T1        |  INL-5APT30                         | ![](Abb/image009.png) |
+|  Hallsensor       | IC1       |  AH49FZ3-G1                         | ![](Abb/image010.png) |
+|  Widerstandsnetz  | RN1       |  SIL 7-6 200 Ω                      | ![](Abb/image011.png) |
+|  Widerstand       | R1, R2    |  10 kΩ: braun - schwarz - orange    | ![](Abb/image012.png) |
+|  Widerstand       | R3        |  2,2 kΩ: rot - rot - rot            | ![](Abb/image013.png) |
+|  Widerstand       | R4        |  100 Ω: braun - schwarz - braun     | ![](Abb/image014.png) |
+|  Widerstand       | R5        |  1 kΩ: braun - schwarz - rot        | ![](Abb/image015.png) |
+|  Transistor       | T2        |  BC 547C                            | ![](Abb/image016.png) |
+|  Buzzer           | BZ1       |  CEM 1203                           | ![](Abb/image017.png) |
+| Steckleiste       |           |  1x20-polig                         | ![](Abb/image018.png) |
+| Raspberry Pi Pico |           |  Raspberry Pi Pico (W)H 1           | ![](Abb/image019.png) |
 
-  Bauelement        Bezeichnung   Wert                                              Symbolbild
-
-  ----------------- ------------- --------------------------- ------------------------------------------------------
-
-  LED               D1 ... D7     2x rot, 2x gelb, 2x grün,          ![](Abb/image007.png)
-
-  Mikrotaster       SW1           Kurzhubtaster 6x6                   ![](Abb/image008.png)
-
-  Fototransistor    T1            INL-5APT30                         ![](Abb/image009.png)
-
-  Hallsensor        IC1           AH49FZ3-G1                         ![](Abb/image010.png)
-
-  Widerstandsnetz   RN1           SIL 7-6 200 Ω               ![](Abb/image011.png)
-
-  Widerstand        R1, R2        10 kΩ: braun -- schwarz --   ![](Abb/image012.png)
-
-  Widerstand        R3            2,2 kΩ: rot -- rot -- rot    ![](Abb/image013.png)
-
-  Widerstand        R4            100 Ω: braun -- schwarz --   ![](Abb/image014.png)
-
-  Widerstand        R5            1 kΩ: braun -- schwarz --    ![](Abb/image015.png)
-
-  Transistor        T2            BC 547C                      ![](Abb/image016.png)
-
-  Buzzer            BZ1           CEM 1203                     ![](Abb/image017.png)
-  Steckleiste                     1x20-polig                   ![](Abb/image018.png)
-
-  Raspberry Pi Pico               Raspberry Pi Pico (W)H 1     ![](Abb/image019.png)
-
-  ------------------------------------------------------------------------------------------------------------------
 
 Für Nachbauten sollten die Widerstandswerte für die LED-Matrix in
 Abhängigkeit von der Helligkeit und von der zulässigen Strombelastung
@@ -108,13 +82,11 @@ Abhängigkeit vom Mengenrabatt.
 
 ## Platine
 
-  ----------------------------------------------------- ----------------------------------------------------
 
-                    Bestückungsseite                                          Lötseite
+|                    Bestückungsseite                        |                  Lötseite |
+|:-----------:|:-------------:|
+|  ![](Abb/image020.jpg) | ![](Abb/image021.jpg) |
 
-   ![](Abb/image020.jpg)  ![](Abb/image021.jpg)
-
-  ----------------------------------------------------- ----------------------------------------------------
 
 Im Falle einer Überarbeitung sollte die Anordnung der Anschlüsse von IC1
 so geändert werden, dass Pin 2 am kürzesten ist.
@@ -148,7 +120,7 @@ benötigt. Seine Anschlüsse müssen so gebogen sein, dass er liegend
 eingelötet werden kann. Die bedruckte schmale Fläche zeigt nach oben.
 Zum Biegen sollte eine Fachzange verwendet werden.
 
-![](Abb/image010.png){width="0.28125in" height="0.3958333333333333in"}
+![](Abb/image010.png)
 
 ### Widerstände
 
@@ -158,9 +130,9 @@ definierte Eingangssignale. R1 bis R5 sind entsprechen ihrer
 Werte/Codierung zu platziert.
 
 R1: ![](Abb/image012.png), R2:
-![](Abb/image013.png), R3:
-![](Abb/image014.png), R4:
-![](Abb/image015.png), R5:
+![](Abb/image012.png), R3:
+![](Abb/image013.png), R4:
+![](Abb/image014.png), R5:
 ![](Abb/image015.png)
 
 ### Widerstandsnetz
@@ -314,25 +286,25 @@ in Microblock, MicroPython und Mind+ programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
 der Arduino-IDE entwickelt.
 
-(1) **Fensteralarm (Aktor: Buzzer; Sensor: Magnetstärke)\
-    **Ein Alarmsignal wird ausgelöst, sobald der Fenstermagnet vom
+(1) **Fensteralarm (Aktor: Buzzer; Sensor: Magnetstärke)**\
+    Ein Alarmsignal wird ausgelöst, sobald der Fenstermagnet vom
     Fenstersensor entfernt wird.
 
-(2) **Dämmerungslichtautomat (Aktor: LED, Sensor: Fototransistor)\
-    **Fällt die Helligkeit unter einen bestimmten Grenzwert, so wird die
+(2) **Dämmerungslichtautomat (Aktor: LED, Sensor: Fototransistor)**\
+    Fällt die Helligkeit unter einen bestimmten Grenzwert, so wird die
     Straßenbeleuchtung aktiviert. Während der Dämmerung ist das Licht
     der Lampe gedimmt.
 
-(3) **Bedarfsampel (Aktor: LED; Sensor: Taster)\
-    **Ein ampelgeschalteter Fußgängerüberweg wird gesteuert. Die
+(3) **Bedarfsampel (Aktor: LED; Sensor: Taster)**\
+    Ein ampelgeschalteter Fußgängerüberweg wird gesteuert. Die
     Straßenampel wechselt systematisch auf Rot, wenn der Fußgänger am
     Knopf seinen Bedarf gemeldet hat. Die zugehörige Fußgängerampel
     schaltet auf grün. Nach einer Überquerungszeit wechseln die Ampeln
     in den Ausgangszustand zurück.
 
 (4) **Schummelwürfel (Aktor: LED, Buzzer; Sensor: Taster, Magnetstärke,
-    Fototransistor)\
-    **Falls es nicht zu hell ist, sind Glücksspiele erlaubt. Ein Druck
+    Fototransistor)**\
+    Falls es nicht zu hell ist, sind Glücksspiele erlaubt. Ein Druck
     auf den Knopf wirft einen virtuellen Würfel und zeigt das Ergebnis
     auf dem LED-Feld an. Wird ein Magnet an den Magnetsensor gelegt, ist
     das Würfelergebnis immer eine sechs.
