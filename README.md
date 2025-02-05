@@ -10,8 +10,7 @@ Minilautsprecher (Buzzer) zur Ausgabe von Tönen angeschlossen sind. Drei
 Sensoren führen zu den analogen Eingängen des Raspberry Pico und dienen
 der Erfassung von Helligkeit, Tastendruck und Magnetfeldstärke.
 
-![](Abb\image001.jpg){width="3.95294072615923in"
-height="2.498885608048994in"}
+![](abb\image001.jpg)
 
 Pico-IO lässt sich in den Entwicklungsumgebungen für den Raspberry Pico
 H block- und textbasiert programmieren, beispielsweise mit
