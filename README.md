@@ -34,6 +34,8 @@ Mikrotasters und einer Steckleiste ist zu beenden.**
 
 ## Schaltplan
 
+Die Schaltung wurde auf einem Breadboard aufgebaut, getestet und in KiCad übertragen. Die KiCad-Dateien liegen im Ordner Hardware. Den Schaltplan gibt es auch als [PDF-Dokument](Hardware/Schaltplan.pdf).
+
 Das zentrale Element der Hardwarekomponente ist der steckbare Raspberry
 Pi Pico H. Von diesem werden die Pins 20 bis 36 benutzt. Es können die
 Version 1 und 2 des Pico (W)H verwendet werden.
@@ -80,14 +82,11 @@ Pico-IO besitzt acht Aktoren:
 |  Raspberry Pi Pico |           |  Raspberry Pi Pico (W)H 1           | ![](Abb/image019.png) |
 
 
-Für Nachbauten sollten die Widerstandswerte für die LED-Matrix in
-Abhängigkeit von der Helligkeit und von der zulässigen Strombelastung
-des GPIO-Ausgangs angepasst werden. Der Hallsensor sollte gegen ein
-Modell getauscht werden, das auch bei schwachen Magnetfeldern
+Für Nachbauten sollten die Widerstandswerte für die LED-Matrix in Abhängigkeit von der Helligkeit und von der zulässigen Strombelastung
+des GPIO-Ausgangs angepasst werden. Der Hallsensor sollte gegen ein Modell getauscht werden, das auch bei schwachen Magnetfeldern
 unterscheidbare Messwerte liefert.
 
-Die Kosten für die Bauelemente liegen bei ca. 7 bis 14 EUR in
-Abhängigkeit vom Mengenrabatt.
+Die Kosten für die Bauelemente liegen bei ca. 7 bis 14 EUR in Abhängigkeit vom Mengenrabatt. 
 
 ## Platine
 
@@ -95,8 +94,7 @@ Abhängigkeit vom Mengenrabatt.
 |:-------------------------------------:|:-----------------------------:|
 | ![Bestückungsseite](Abb/image020.jpg) | ![Lötseite](Abb/image021.jpg) |
 
-Im Falle einer Überarbeitung sollte die Anordnung der Anschlüsse von IC1
-so geändert werden, dass Pin 2 am kürzesten ist.
+Die Platinen wurden in KiCad entwickelt. Im Hardware-Ordner liegen alle Daten vor. Im Falle einer Überarbeitung sollte die Anordnung der Anschlüsse von IC1 so geändert werden, dass Pin 2 am kürzesten ist.
 
 Die Kosten für die Platine hängen stark vom Anbieter und der Menge ab.
 Die 100 Platinen für die Landestagung kosteten seinerzeit incl. Versand,
@@ -291,7 +289,7 @@ Port zu wählen.
 In den Unterlagen zum Projekt finden sich vier Anwendungsbeispiele, die
 in Microblock, MicroPython und Mind+ programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
-der Arduino-IDE entwickelt, liegt aber auch in Mython vor.
+der Arduino-IDE entwickelt, liegt aber auch in Python vor.
 
 (1) **Fensteralarm (Aktor: Buzzer; Sensor: Magnetstärke)**\
     Ein Alarmsignal wird ausgelöst, sobald der Fenstermagnet vom
