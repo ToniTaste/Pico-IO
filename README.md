@@ -1,12 +1,13 @@
 # Pico-IO
+
 Pico-IO ist eine Hardwarekomponente mit Sensoren und Aktoren. Sie
-besteht aus einem Raspberry Pico an dem sieben LED -- beispielsweise zur
-Anzeige von Ampeln oder eines Würfelergebnisses -- und ein
+besteht aus einem Raspberry Pico an dem sieben LED - beispielsweise zur
+Anzeige von Ampeln oder eines Würfelergebnisses - und ein
 Minilautsprecher (Buzzer) zur Ausgabe von Tönen angeschlossen sind. Drei
 Sensoren führen zu den analogen Eingängen des Raspberry Pico und dienen
 der Erfassung von Helligkeit, Tastendruck und Magnetfeldstärke.
 
-![](Abb/image001.jpg)
+![Pico-IO](Abb/image001.jpg)
 
 Pico-IO lässt sich in den Entwicklungsumgebungen für den Raspberry Pico
 H block- und textbasiert programmieren, beispielsweise mit
@@ -16,7 +17,7 @@ Pico-IO wurde für die 16. Landestagung der GI-Fachgruppe „Informatische
 Bildung in Mecklenburg-Vorpommern" 2025 entwickelt und allen
 Fachgruppenmitgliedern kostenfrei zur Verfügung gestellt.
 
-![](Abb/image002.jpg)
+![100 Pico-IO für Landestagung](Abb/image002.jpg)
 
 Pico-IO unterliegt der Creative Commons Licence CC BY-SA 4. Alle
 Materialien, Schaltpläne und Bilder und Programmbeispiele stehen somit
@@ -35,40 +36,42 @@ Das zentrale Element der Hardwarekomponente ist der steckbare Raspberry
 Pi Pico H. Von diesem werden die Pins 20 bis 36 benutzt. Es können die
 Version 1 und 2 des Pico (W)H verwendet werden.
 
-![](Abb/image003.png)
+![Schaltung Raspberry Pi Pico](Abb/image003.png)
 
 Pico-IO verfügt über drei Sensoren:
+
 - GPIO 26: Tastsensor Wertebereich: \[\< 10, 1023\]
 - GPIO 27: Magnetsensor Wertebereich: \[≈ 275 ... ≈ 825\], Normalwert: ≈ 555
 - GPIO 28: Lichtsensor Wertebereich: \[\< 10 ... 1023\]
 
-![](Abb/image004.png)
+![Schaltung Sensoren](Abb/image004.png)
 
 Pico-IO besitzt acht Aktoren:
+
 - GPIO 16 ... 22: LED-Matrix
 - GPIO 15: Tonausgabe über Buzzer
 
-![](Abb/image005.png)
+![Schaltung Aktoren](Abb/image005.png)
 
 ## Bauelemente
 
 ![](image006.jpg)
 
-| Bauelement | Bezeichnung | Wert | Symbolbild |
-|------------|-------------|------|------------|
-|  LED              | D1 ... D7 |  2x rot, 2x gelb, 2x grün, 1x blau  | ![](Abb/image007.png) |
-|  Mikrotaster      | SW1       |  Kurzhubtaster 6x6                  | ![](Abb/image008.png) |
-|  Fototransistor   | T1        |  INL-5APT30                         | ![](Abb/image009.png) |
-|  Hallsensor       | IC1       |  AH49FZ3-G1                         | ![](Abb/image010.png) |
-|  Widerstandsnetz  | RN1       |  SIL 7-6 200 Ω                      | ![](Abb/image011.png) |
-|  Widerstand       | R1, R2    |  10 kΩ: braun - schwarz - orange    | ![](Abb/image012.png) |
-|  Widerstand       | R3        |  2,2 kΩ: rot - rot - rot            | ![](Abb/image013.png) |
-|  Widerstand       | R4        |  100 Ω: braun - schwarz - braun     | ![](Abb/image014.png) |
-|  Widerstand       | R5        |  1 kΩ: braun - schwarz - rot        | ![](Abb/image015.png) |
-|  Transistor       | T2        |  BC 547C                            | ![](Abb/image016.png) |
-|  Buzzer           | BZ1       |  CEM 1203                           | ![](Abb/image017.png) |
-| Steckleiste       |           |  1x20-polig                         | ![](Abb/image018.png) |
-| Raspberry Pi Pico |           |  Raspberry Pi Pico (W)H 1           | ![](Abb/image019.png) |
+|: Bauelement        |: Name     |: Wert                               |: Symbolbild           |
+|--------------------|-----------|-------------------------------------|-----------------------|
+|  LED               | D1 ... D7 |  2x rot, 2x gelb, 2x grün, 1x blau  | ![](Abb/image007.png) |
+|  Mikrotaster       | SW1       |  Kurzhubtaster 6x6                  | ![](Abb/image008.png) |
+|  Fototransistor    | T1        |  INL-5APT30                         | ![](Abb/image009.png) |
+|  Hallsensor        | IC1       |  AH49FZ3-G1                         | ![](Abb/image010.png) |
+|  Widerstandsnetz   | RN1       |  SIL 7-6 200 Ω                      | ![](Abb/image011.png) |
+|  Widerstand        | R1, R2    |  10 kΩ: braun - schwarz - orange    | ![](Abb/image012.png) |
+|  Widerstand        | R3        |  2,2 kΩ: rot - rot - rot            | ![](Abb/image013.png) |
+|  Widerstand        | R4        |  100 Ω: braun - schwarz - braun     | ![](Abb/image014.png) |
+|  Widerstand        | R5        |  1 kΩ: braun - schwarz - rot        | ![](Abb/image015.png) |
+|  Transistor        | T2        |  BC 547C                            | ![](Abb/image016.png) |
+|  Buzzer            | BZ1       |  CEM 1203                           | ![](Abb/image017.png) |
+|  Steckleiste       |           |  1x20-polig                         | ![](Abb/image018.png) |
+|  Raspberry Pi Pico |           |  Raspberry Pi Pico (W)H 1           | ![](Abb/image019.png) |
 
 
 Für Nachbauten sollten die Widerstandswerte für die LED-Matrix in
@@ -82,11 +85,9 @@ Abhängigkeit vom Mengenrabatt.
 
 ## Platine
 
-
-|                    Bestückungsseite                        |                  Lötseite |
-|:-----------:|:-------------:|
-|  ![](Abb/image020.jpg) | ![](Abb/image021.jpg) |
-
+| Bestückungsseite                      | Lötseite                      |
+|:-------------------------------------:|:-----------------------------:|
+| ![Bestückungsseite](Abb/image020.jpg) | ![Lötseite](Abb/image021.jpg) |
 
 Im Falle einer Überarbeitung sollte die Anordnung der Anschlüsse von IC1
 so geändert werden, dass Pin 2 am kürzesten ist.
@@ -100,27 +101,21 @@ Zoll und Steuern etwas über 50 EUR.
 ### Werkzeug und Zubehör
 
 - Lötkolben für elektronische Bauelemente
-
 - Seitenscheider
-
 - Flachzange
-
-- Lötzinn 1 mm Durchmesser SN99 mit (möglichst wasserlöslichem)
-  Flussmittel
+- Lötzinn 1 mm Durchmesser SN99 mit (möglichst wasserlöslichem) Flussmittel
 
 Der Aufbau erfolgt vom flachsten zum höchsten Bauelement. Diese werden
 auf der Bestückungsseite platziert und auf der Lötseite gelötet. Bei
 bestimmten Bauelemente ist die Polung zu beachten.
 
-### Hall-Sensor
+### Hall-Sensor ![](Abb/image010.png)
 
 IC1 ist für die Erfassung der Magnetfeldstärke zuständig. Es handelt
 sich um einen integrierten Schaltkreis, der keine Zusatzbeschaltung
 benötigt. Seine Anschlüsse müssen so gebogen sein, dass er liegend
 eingelötet werden kann. Die bedruckte schmale Fläche zeigt nach oben.
 Zum Biegen sollte eine Fachzange verwendet werden.
-
-![](Abb/image010.png)
 
 ### Widerstände
 
