@@ -291,7 +291,7 @@ Port zu wählen.
 In den Unterlagen zum Projekt finden sich vier Anwendungsbeispiele, die
 in Microblock, MicroPython und Mind+ programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
-der Arduino-IDE entwickelt.
+der Arduino-IDE entwickelt, liegt aber auch in Mython vor.
 
 (1) **Fensteralarm (Aktor: Buzzer; Sensor: Magnetstärke)**\
     Ein Alarmsignal wird ausgelöst, sobald der Fenstermagnet vom
