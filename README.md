@@ -157,7 +157,8 @@ Der Taster SW1 dient als Eingabesensor.
 ### Transistor
 
 | Symbolbild: ![](Abb/image024.png) | Bauelement im Schaltplan: ![](Abb/image025.png) |
-|:---------------------------------:|:---------------------------------------|
+|:---------------------------------:|:-----------------------------------------------:|
+
 Der Transistor T2 schaltet das Signal zum Buzzer und verhindert eine
 Überlastung des Prozessors. Beim Einbau ist auf die korrekte Polung zu
 achten. Die runde Seite des Gehäuses zeigt zu R4 und R5.
@@ -174,19 +175,20 @@ gekennzeichneten Anschluss zu stecken.
 
 ### LED
 
+| Symbolbild: ![](Abb/image027.png) | Bauelement im Schaltplan: ![](Abb/image028.png) |
+|-----------------------------------|-------------------------------------------------|
+
 Die Leuchtdioden (LED) dienen der Ausgabe. Um Ampeln programmieren zu
-können, ist als Farbfolge von D1 zu D3 und von D5 zu D7 jeweils rot --
-gelb -- grün zu wählen. Die blaue LED ist D4. Beim Einbau ist die Polung
+können, ist als Farbfolge von D1 zu D3 und von D5 zu D7 jeweils rot -
+gelb - grün zu wählen. Die blaue LED ist D4. Beim Einbau ist die Polung
 zu beachten. Der Platinenaufdruck zeigt die abgeflachte Seite der LED
 an.
 
-Symbolbild: ![](Abb/image027.png) Bauelement im Schaltplan:
-![](Abb/image028.png)
 
 ### Fototransistor
 
 | Symbolbild: ![](Abb/image029.png) | Bauelement im Schaltplan: ![](Abb/image030.png) |
-|:----------------------------------:|:-----------------------------------------------|
+|:----------------------------------:|:----------------------------------------------:|
 
 Der Fototransistor T1 sieht wie eine LED im klaren Gehäuse aus. Es
 handelt sich jedoch um einen Sensor, der den Strom in Abhängigkeit von
