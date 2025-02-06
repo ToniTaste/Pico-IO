@@ -1,13 +1,14 @@
 # Pico-IO
 
 Pico-IO ist eine Hardwarekomponente mit Sensoren und Aktoren. Sie
-besteht aus einem Raspberry Pico an dem sieben LED - beispielsweise zur
+besteht aus einem Raspberry Pico, an dem sieben LED - beispielsweise zur
 Anzeige von Ampeln oder eines Würfelergebnisses - und ein
 Minilautsprecher (Buzzer) zur Ausgabe von Tönen angeschlossen sind. Drei
 Sensoren führen zu den analogen Eingängen des Raspberry Pico und dienen
 der Erfassung von Helligkeit, Tastendruck und Magnetfeldstärke.
 
-![Pico-IO](Abb/image001.jpg)
+| ![Pico-IO](Abb/image001.jpg) |
+|:----------------------------:|
 
 Pico-IO lässt sich in den Entwicklungsumgebungen für den Raspberry Pico
 H block- und textbasiert programmieren, beispielsweise mit
@@ -17,7 +18,8 @@ Pico-IO wurde für die 16. Landestagung der GI-Fachgruppe „Informatische
 Bildung in Mecklenburg-Vorpommern" 2025 entwickelt und allen
 Fachgruppenmitgliedern kostenfrei zur Verfügung gestellt.
 
-![100 Pico-IO für Landestagung](Abb/image002.jpg)
+| ![100 Pico-IO für Landestagung](Abb/image002.jpg) |
+|:-------------------------------------------------:|
 
 Pico-IO unterliegt der Creative Commons Licence CC BY-SA 4. Alle
 Materialien, Schaltpläne und Bilder und Programmbeispiele stehen somit
@@ -36,7 +38,8 @@ Das zentrale Element der Hardwarekomponente ist der steckbare Raspberry
 Pi Pico H. Von diesem werden die Pins 20 bis 36 benutzt. Es können die
 Version 1 und 2 des Pico (W)H verwendet werden.
 
-![Schaltung Raspberry Pi Pico](Abb/image003.png)
+| ![Schaltung Raspberry Pi Pico](Abb/image003.png) |
+|:------------------------------------------------:|
 
 Pico-IO verfügt über drei Sensoren:
 
@@ -44,20 +47,23 @@ Pico-IO verfügt über drei Sensoren:
 - GPIO 27: Magnetsensor Wertebereich: \[≈ 275 ... ≈ 825\], Normalwert: ≈ 555
 - GPIO 28: Lichtsensor Wertebereich: \[\< 10 ... 1023\]
 
-![Schaltung Sensoren](Abb/image004.png)
+| ![Schaltung Sensoren](Abb/image004.png) |
+|:---------------------------------------:|
 
 Pico-IO besitzt acht Aktoren:
 
 - GPIO 16 ... 22: LED-Matrix
 - GPIO 15: Tonausgabe über Buzzer
 
-![Schaltung Aktoren](Abb/image005.png)
+| ![Schaltung Aktoren](Abb/image005.png) |
+|:--------------------------------------:|
 
 ## Bauelemente
 
-![](image006.jpg)
+| ![Bauelementübersicht](Abb/image006.jpg) |
+|:----------------------------------------:|
 
-|: Bauelement        |: Name     |: Wert                               |: Symbolbild           |
+| Bauelement         | Name      | Wert                                |  Symbolbild           |
 |--------------------|-----------|-------------------------------------|-----------------------|
 |  LED               | D1 ... D7 |  2x rot, 2x gelb, 2x grün, 1x blau  | ![](Abb/image007.png) |
 |  Mikrotaster       | SW1       |  Kurzhubtaster 6x6                  | ![](Abb/image008.png) |
@@ -77,7 +83,7 @@ Pico-IO besitzt acht Aktoren:
 Für Nachbauten sollten die Widerstandswerte für die LED-Matrix in
 Abhängigkeit von der Helligkeit und von der zulässigen Strombelastung
 des GPIO-Ausgangs angepasst werden. Der Hallsensor sollte gegen ein
-Modell getauscht werden, dass auch bei schwachen Magnetfeldern
+Modell getauscht werden, das auch bei schwachen Magnetfeldern
 unterscheidbare Messwerte liefert.
 
 Die Kosten für die Bauelemente liegen bei ca. 7 bis 14 EUR in
@@ -92,7 +98,7 @@ Abhängigkeit vom Mengenrabatt.
 Im Falle einer Überarbeitung sollte die Anordnung der Anschlüsse von IC1
 so geändert werden, dass Pin 2 am kürzesten ist.
 
-Die Kosten für die Platine hängt stark vom Anbieter und der Menge ab.
+Die Kosten für die Platine hängen stark vom Anbieter und der Menge ab.
 Die 100 Platinen für die Landestagung kosteten seinerzeit incl. Versand,
 Zoll und Steuern etwas über 50 EUR.
 
@@ -109,28 +115,31 @@ Der Aufbau erfolgt vom flachsten zum höchsten Bauelement. Diese werden
 auf der Bestückungsseite platziert und auf der Lötseite gelötet. Bei
 bestimmten Bauelemente ist die Polung zu beachten.
 
-### Hall-Sensor ![](Abb/image010.png)
+### Hall-Sensor 
+
+| ![](Abb/image010.png) |
+|:----------------------------------------:|
 
 IC1 ist für die Erfassung der Magnetfeldstärke zuständig. Es handelt
 sich um einen integrierten Schaltkreis, der keine Zusatzbeschaltung
 benötigt. Seine Anschlüsse müssen so gebogen sein, dass er liegend
 eingelötet werden kann. Die bedruckte schmale Fläche zeigt nach oben.
-Zum Biegen sollte eine Fachzange verwendet werden.
+Zum Biegen sollte eine Flachzange verwendet werden.
 
 ### Widerstände
 
+| R1: ![](Abb/image012.png), R2: ![](Abb/image012.png), R3: ![](Abb/image013.png), R4: ![](Abb/image014.png), R5: ![](Abb/image015.png) |
+|:----------------------------------------:|
+
 R3 bis R5 begrenzen den Stromfluss auf zulässige Werte. R1 und R2 sorgen
 an den Eingängen des Raspberry Pico als sog. Pull-Down-Widerstände für
-definierte Eingangssignale. R1 bis R5 sind entsprechen ihrer
+definierte Eingangssignale. R1 bis R5 sind entsprechend ihrer
 Werte/Codierung zu platziert.
 
-R1: ![](Abb/image012.png), R2:
-![](Abb/image012.png), R3:
-![](Abb/image013.png), R4:
-![](Abb/image014.png), R5:
-![](Abb/image015.png)
-
 ### Widerstandsnetz
+
+| Bauelement: ![](Abb/image011.png) | interner Aufbau: ![](Abb/image022.png) |
+|:---------------------------------:|:---------------------------------------|
 
 RN1 ist ein Widerstandsnetz und fasst mehrere Widerstände sternförmig
 zusammen. So wird der Platzbedarf auf der Platine reduziert. Auf der
@@ -138,32 +147,30 @@ Beschriftungsseite des Bauelements markiert ein Punkt Pin 1 und somit
 die Sternmitte. Dieser Pin gehört in das quadratisch umrandete Loch auf
 der Platine.
 
-Bauelement: ![](Abb/image011.png)
-interner Aufbau: ![](Abb/image022.png)
-
 ### Taster
+
+| ![](Abb/image023.png) |
+|:---------------------:|
 
 Der Taster SW1 dient als Eingabesensor.
 
-![](Abb/image023.png)
-
 ### Transistor
 
+| Symbolbild: ![](Abb/image024.png) | Bauelement im Schaltplan: ![](Abb/image025.png) |
+|:---------------------------------:|:---------------------------------------|
 Der Transistor T2 schaltet das Signal zum Buzzer und verhindert eine
 Überlastung des Prozessors. Beim Einbau ist auf die korrekte Polung zu
 achten. Die runde Seite des Gehäuses zeigt zu R4 und R5.
 
-Symbolbild: ![](Abb/image024.png) Bauelement im Schaltplan:
-![](Abb/image025.png)
-
 ### Buzzer
+
+| ![](Abb/image026.png) |
+|:----------------------:|
 
 Der Buzzer BZ1 erzeugt bei Verwendung eines schwingenden
 Spannungssignals eine Tonausgabe. Auf dem Buzzergehäuse befindet sich
 ein Plus-Symbol. Der zugehörige PIN ist in den auf der Platine mit Plus
 gekennzeichneten Anschluss zu stecken.
-
-![](Abb/image026.png)
 
 ### LED
 
@@ -178,23 +185,25 @@ Symbolbild: ![](Abb/image027.png) Bauelement im Schaltplan:
 
 ### Fototransistor
 
+| Symbolbild: ![](Abb/image029.png) | Bauelement im Schaltplan: ![](Abb/image030.png) |
+|:----------------------------------:|:-----------------------------------------------|
+
 Der Fototransistor T1 sieht wie eine LED im klaren Gehäuse aus. Es
 handelt sich jedoch um einen Sensor, der den Strom in Abhängigkeit von
 der Helligkeit fließen lässt. Für den Einbau muss er korrekt gepolt wie
 im Aufdruck abgebildet eingelötet werden. Die abgeflachte Seite zeigt
 nach rechts.
 
-Symbolbild: ![](Abb/image029.png) Bauelement im Schaltplan:
-![](Abb/image030.png)
-
 ### Steckerleisten
+
+| ![](Abb/image031.png) |
+|:---------------------:|
 
 Die beiden Steckerleisten tragen den Raspberry Pi Pico H. Nach Abschluss
 der Lötarbeiten kann der Pico eingesetzt werden. Dabei ist auf die
 korrekte Ausrichtung zu achten. Der USB-Port befindet sich rechts über
 den Widerständen R4 und R5.
 
-![](Abb/image031.png)
 
 ### Raspberry Pi Pico (W)H
 
@@ -206,10 +215,11 @@ Eine besondere Rolle hat die Taste BOOTSEL. Sie ermöglicht es, den
 Raspberry Pi Pico in den Bootloader-Modus zu versetzen. Beim Drücken der
 BOOTSEL-Taste während des Anschlusses an einen Computer erscheint der
 Pico als USB-Massenspeicher. So kann Firmware oder lauffähige Systeme,
-beispielsweise MicroPython oder das Arduino-Demo-Programme, einfach auf
+beispielsweise MicroPython oder das Arduino-Demo-Programm, einfach auf
 den Mikrocontroller übertragen werden.
 
-![](Abb/image032.png)
+| ![](Abb/image032.png) |
+|:---------------------:|
 
 # Programmierung
 
@@ -300,6 +310,6 @@ der Arduino-IDE entwickelt.
 (4) **Schummelwürfel (Aktor: LED, Buzzer; Sensor: Taster, Magnetstärke,
     Fototransistor)**\
     Falls es nicht zu hell ist, sind Glücksspiele erlaubt. Ein Druck
-    auf den Knopf wirft einen virtuellen Würfel und zeigt das Ergebnis
+    auf den Taster wirft einen virtuellen Würfel und zeigt das Ergebnis
     auf dem LED-Feld an. Wird ein Magnet an den Magnetsensor gelegt, ist
     das Würfelergebnis immer eine sechs.
