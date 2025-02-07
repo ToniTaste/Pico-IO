@@ -12,7 +12,6 @@ button = Pin(26, Pin.IN, Pin.PULL_DOWN)
 def schaltePhase():
     # Phase 1: Warte, dann: Seite – Rot aus, Gelb an, Grün aus
     sleep(0.5)
-    led_s_rot.off()
     led_s_gelb.on()
     led_s_gruen.off()
 
@@ -20,7 +19,6 @@ def schaltePhase():
     sleep(1)
     led_s_rot.on()
     led_s_gelb.off()
-    led_s_gruen.off()
 
     # Phase 3: Warte, dann: Fußgänger – Rot aus, Grün an
     sleep(0.5)
@@ -28,15 +26,13 @@ def schaltePhase():
     led_f_gruen.on()
 
     # Phase 4: Warte, dann: Fußgänger – Rot an, Grün aus
-    sleep(2)
+    sleep(4)
     led_f_rot.on()
     led_f_gruen.off()
 
     # Phase 5: Warte, dann: Seite – Rot und Gelb an, Grün aus
     sleep(0.5)
-    led_s_rot.on()
     led_s_gelb.on()
-    led_s_gruen.off()
 
     # Phase 6: Warte, dann: Seite – Rot und Gelb aus, Grün an
     sleep(0.5)
@@ -45,7 +41,7 @@ def schaltePhase():
     led_s_gruen.on()
 
     # Abschließende Pause
-    sleep(0.5)
+    sleep(2)
 
 def main():
     # Initiale Zustände
@@ -58,9 +54,7 @@ def main():
     while True:
         if button.value():
             schaltePhase()
-            # Entprellung: Warten, bis der Taster wieder losgelassen wird
-            while button.value():
-                sleep(0.1)
+            
 
 if __name__ == "__main__":
     main()

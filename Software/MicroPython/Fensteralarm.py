@@ -8,19 +8,19 @@ buzzer = PWM(Pin(15))
 sensor = ADC(Pin(27))
 
 # Normwert als Referenz
-normwert = 32768
+normwert = 533 
 
-def play_buzzer(frequency, duration):
+def spiele_Ton(frequency, duration):
     buzzer.freq(frequency)
-    buzzer.duty_u16(32768)  # 50% Duty Cycle
+    buzzer.duty_u16(32768)  
     sleep(duration)
     buzzer.duty_u16(0)  # Aus
 
 while True:
-    # Sensorwert einlesen
-    messwert = sensor.read_u16()
+    # Sensorwert einlesen mit Anpassung von 16 Bit auf 10 Bit
+    messwert = sensor.read_u16() >> 6 
 
     # Prüfen, ob der Messwert nahe am Normwert liegt (Differenz < 25)
-    if abs(messwert - normwert) < 7000:
-        play_buzzer(1000, 0.25)
+    if abs(messwert - normwert) < 25:
+        spiele_Ton(1000, 0.25)
         sleep(0.5)
