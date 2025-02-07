@@ -286,8 +286,8 @@ Port zu wählen.
 
 ## Anwendungsbeispiele
 
-In den Unterlagen zum Projekt finden sich vier Anwendungsbeispiele, die
-in Microblock, MicroPython und Mind+ programmiert wurde. Das
+In den Unterlagen zum Projekt finden sich vier [Anwendungsbeispiele](https://github.com/ToniTaste/Pico-IO/tree/main/Software), die
+in Microblock, MicroPython, Mind+ und Arduino programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
 der Arduino-IDE entwickelt, liegt aber auch in Python vor.
 
