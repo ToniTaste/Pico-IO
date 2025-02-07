@@ -7,23 +7,19 @@ description ''
 
 to schaltePhase {
   waitMillis 500
-  digitalWriteOp 16 false
   digitalWriteOp 17 true
   digitalWriteOp 18 false
   waitMillis 1000
   digitalWriteOp 16 true
   digitalWriteOp 17 false
-  digitalWriteOp 18 false
   waitMillis 500
   digitalWriteOp 20 false
   digitalWriteOp 22 true
-  waitMillis 2000
+  waitMillis 4000
   digitalWriteOp 20 true
   digitalWriteOp 22 false
   waitMillis 500
-  digitalWriteOp 16 true
   digitalWriteOp 17 true
-  digitalWriteOp 18 false
   waitMillis 500
   digitalWriteOp 16 false
   digitalWriteOp 17 false
@@ -31,11 +27,7 @@ to schaltePhase {
   waitMillis 2000
 }
 
-script 359 50 {
-to schaltePhase {}
-}
-
-script 54 56 {
+script 66 66 {
 whenStarted
 digitalWriteOp 16 false
 digitalWriteOp 17 false
@@ -45,5 +37,9 @@ digitalWriteOp 22 false
 forever {
   if (digitalReadOp 26) {schaltePhase}
 }
+}
+
+script 68 446 {
+to schaltePhase {}
 }
 
