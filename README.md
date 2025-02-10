@@ -283,14 +283,13 @@ Port zu wählen.
 
 ![](Abb/image036.png)
 
-## Textbasierte Programmierung mit Java mind. Version 17 in BlueJ oder JavaEditor
+## Textbasierte Programmierung mit Java mind. Version 17 in BlueJ oder JavaEditor (unter Windows)
 
-Pico-IO benötigt eine [Firmware](https://github.com/ToniTaste/Pico-IO/tree/main/Software), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
+Pico-IO benötigt eine [Firmware](Software/Java/Firmata), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
 Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
 
-Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige Bibliotheken in Java einzubinden. In BlueJ geht die im Menü Werkzeuge - Einstellungen - Bibliotheken - Benutzerbibliotheken. Im JavaEditor erreicht man dies über Fenster - Konfiguration - Classpath User. Dort sind die Bibliotheken aus dem Ordner ... einzubinden.
+Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige [Bibliotheken](Software/Java/Bibliotheken) in Java einzubinden. In BlueJ geht die im Menü  „Werkzeuge" 🡪 „Einstellungen" 🡪 „Bibliotheken" 🡪 „Benutzerbibliotheken". Im JavaEditor erreicht man dies über „Fenster" 🡪 „Konfiguration" 🡪 „Classpath User". Dort sind die Bibliotheken aus dem Ordner einzubinden. Der Quelltext der Hauptbibliothek PicoIo.java befindet sich im Ordner [Source](Software/Java/Source)
 
-![](Abb/image036.png)
 
 ## Anwendungsbeispiele
 
