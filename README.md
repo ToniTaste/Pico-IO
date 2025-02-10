@@ -10,8 +10,7 @@ der Erfassung von Helligkeit, Tastendruck und Magnetfeldstärke.
 | ![Pico-IO](Abb/image001.jpg) |
 |:----------------------------:|
 
-Pico-IO lässt sich in Entwicklungsumgebungen für den Raspberry Pico
-H block- und textbasiert programmieren. Das System wurde erfolgreich mit Microblocks.fun, Mind+, Thonny (MicroPytho) und Java getestet.
+Pico-IO lässt sich in Entwicklungsumgebungen für den Raspberry Pico block- und textbasiert programmieren. Das System wurde erfolgreich mit Microblocks, Mind+, Thonny (MicroPython), Arduino (C++) und Java getestet. Vier Beispiele liegen in den Sprachen vor.
 
 Pico-IO wurde für die 16. Landestagung der GI-Fachgruppe „Informatische
 Bildung in Mecklenburg-Vorpommern" 2025 entwickelt und allen
