@@ -289,10 +289,10 @@ Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Compu
 
 Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige [Bibliotheken](Software/Java/Bibliotheken) in Java einzubinden. 
 
-- In BlueJ geht die im Menü  „Werkzeuge" 🡪 „Einstellungen" 🡪 „Bibliotheken" 🡪 „Benutzerbibliotheken". Alternativ kann man auch im jeweiligen BluJ-Projektordner einen Unterordner namens +libs anlegen und die Bibliotheken dort hinein kopieren. BlueJ findet Sie dann stets automatisch.
-- Im JavaEditor erreicht man dies über „Fenster" 🡪 „Konfiguration" 🡪 „Classpath User". Dort sind die Bibliotheken aus dem Ordner einzubinden.
+- In BlueJ geht dies im Menü  „Werkzeuge" 🡪 „Einstellungen" 🡪 „Bibliotheken" 🡪 „Benutzerbibliotheken". Alternativ kann man auch im jeweiligen BlueJ-Projektordner einen Unterordner namens "+libs" anlegen und die Bibliotheken dort hinein kopieren. BlueJ findet diese dann stets automatisch.
+- Im JavaEditor erreicht man Einbindung über „Fenster" 🡪 „Konfiguration" 🡪 „Classpath User". Dort sind die Bibliotheken aus dem Ordner anzugeben.
 
-Der Quelltext der Hauptbibliothek PicoIo.java befindet sich im Ordner [Source](Software/Java/Source)
+Der Quelltext der Hauptbibliothek PicoIO.java befindet sich im Ordner [Source](Software/Java/Source)
 
 
 ## Anwendungsbeispiele
