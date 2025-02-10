@@ -10,9 +10,8 @@ der Erfassung von Helligkeit, Tastendruck und Magnetfeldstärke.
 | ![Pico-IO](Abb/image001.jpg) |
 |:----------------------------:|
 
-Pico-IO lässt sich in den Entwicklungsumgebungen für den Raspberry Pico
-H block- und textbasiert programmieren, beispielsweise mit
-Microblocks.fun oder Thonny.
+Pico-IO lässt sich in Entwicklungsumgebungen für den Raspberry Pico
+H block- und textbasiert programmieren. Das System wurde erfolgreich mit Microblocks.fun, Mind+, Thonny (MicroPytho) und Java getestet.
 
 Pico-IO wurde für die 16. Landestagung der GI-Fachgruppe „Informatische
 Bildung in Mecklenburg-Vorpommern" 2025 entwickelt und allen
@@ -284,10 +283,19 @@ Port zu wählen.
 
 ![](Abb/image036.png)
 
+## Textbasierte Programmierung mit Java mind. Version 17 in BlueJ oder JavaEditor
+
+Pico-IO benötigt eine Firmware, die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
+Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
+
+Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige Bibliotheken in Java einzubinden. In BlueJ geht die im Menü Werkzeuge - Einstellungen - Bibliotheken - Benutzerbibliotheken. Im JavaEditor erreicht man dies über Fenster - Konfiguration - Classpath User. Dort sind die Bibliotheken aus dem Ordner ... einzubinden.
+
+![](Abb/image036.png)
+
 ## Anwendungsbeispiele
 
 In den Unterlagen zum Projekt finden sich vier [Anwendungsbeispiele](https://github.com/ToniTaste/Pico-IO/tree/main/Software), die
-in Microblock, MicroPython, Mind+ und Arduino programmiert wurde. Das
+in Microblock, MicroPython, Mind+, Arduino und Java programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
 der Arduino-IDE entwickelt, liegt aber auch in Python vor.
 
