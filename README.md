@@ -285,7 +285,7 @@ Port zu wählen.
 
 ## Textbasierte Programmierung mit Java mind. Version 17 in BlueJ oder JavaEditor
 
-Pico-IO benötigt eine Firmware, die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
+Pico-IO benötigt eine [Firmware](https://github.com/ToniTaste/Pico-IO/tree/main/Software), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
 Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
 
 Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige Bibliotheken in Java einzubinden. In BlueJ geht die im Menü Werkzeuge - Einstellungen - Bibliotheken - Benutzerbibliotheken. Im JavaEditor erreicht man dies über Fenster - Konfiguration - Classpath User. Dort sind die Bibliotheken aus dem Ordner ... einzubinden.
@@ -294,7 +294,7 @@ Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige Bibliothe
 
 ## Anwendungsbeispiele
 
-In den Unterlagen zum Projekt finden sich vier [Anwendungsbeispiele](https://github.com/ToniTaste/Pico-IO/tree/main/Software), die
+In den Unterlagen zum Projekt finden sich vier [Anwendungsbeispiele](Software/), die
 in Microblock, MicroPython, Mind+, Arduino und Java programmiert wurde. Das
 Demo-Programm, welches auch das Schummelwürfelspiel umfasst, wurde mit
 der Arduino-IDE entwickelt, liegt aber auch in Python vor.
