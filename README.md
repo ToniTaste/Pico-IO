@@ -287,12 +287,16 @@ Port zu wählen.
 Pico-IO benötigt eine [Firmware](Software/Java/Firmata), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
 Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
 
+![](Abb/bluej.png)
+
 Damit aus Java heraus auf Pico-IO zugegriffen werden kann, sind einige [Bibliotheken](Software/Java/Bibliotheken) in Java einzubinden. 
 
 - In BlueJ geht dies im Menü  „Werkzeuge" 🡪 „Einstellungen" 🡪 „Bibliotheken" 🡪 „Benutzerbibliotheken". Alternativ kann man auch im jeweiligen BlueJ-Projektordner einen Unterordner namens "+libs" anlegen und die Bibliotheken dort hinein kopieren. BlueJ findet diese dann stets automatisch.
 - Im JavaEditor erreicht man Einbindung über „Fenster" 🡪 „Konfiguration" 🡪 „Classpath User". Dort sind die Bibliotheken aus dem Ordner anzugeben.
 
-Der Quelltext der Hauptbibliothek PicoIO.java befindet sich im Ordner [Source](Software/Java/Source)
+Der Quelltext der Hauptbibliothek PicoIO.java befindet sich im Ordner [Source](Software/Java/Source). Sie verfügt über nachfolgende Methoden.
+
+<img src="Software/Java/Source/PicoIO.svg" alt="drawing" width="400"/>
 
 
 ## Anwendungsbeispiele
