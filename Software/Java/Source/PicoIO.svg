@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="29cm" height="30cm" viewBox="47 42 567 598" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="48" y="43" width="564.4" height="32"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="48" y="43" width="564.4" height="32"/>
+    <text font-size="19.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="330.2" y="65">PicoIO</text>
+    <rect style="fill: #ffffff" x="48" y="75" width="564.4" height="564"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="48" y="75" width="564.4" height="564"/>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="92">+open()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="112">+close()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="132">+getStatus(): boolean</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="152">+ledOn(pin:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="172">+ledOff(pin:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="192">+ledSwitch(pin:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="212">+ledSet(pin:int,state:boolean)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="232">+ledDim(pin:int,value:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="252">+getLedValue(pin:int): int</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="272">+getLedState(pin:int): boolean</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="292">+ledsOff()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="312">+isPressed(): boolean</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="332">+wasPressed(): boolean</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="352">+clearPressed()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="372">+getLight(): int</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="392">+getHall(): int</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="412">+isContacted(): boolean</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="432">+playBeep()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="452">+stopBeep()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="472">+pause(millis:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="492">+startClock()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="512">+getClock(): long</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="532">+stopClock(): long</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="552">+startLoop(o:Object,methodname:String): int</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="572">+startLoopWidthDelay(o:Object,methodName:String,delay:int): int</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="592">+stopLoop(loopId:int)</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="612">+stopAllLoops()</text>
+    <text font-size="16" style="fill: #000000;text-anchor:start;font-family:Consolas;font-style:normal;font-weight:normal" x="51" y="632">+listLoops()</text>
+  </g>
+</svg>
