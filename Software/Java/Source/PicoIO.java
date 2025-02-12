@@ -336,16 +336,6 @@ public class PicoIO {
   }
 
   /**
-   * Programm pausiert
-   * @param milliseconds Zeit in ms
-   */
-  public static void pause(int milliseconds) {
-    try {
-      Thread.sleep(milliseconds);
-    } catch (InterruptedException ignored) {}
-  }
-
-  /**
    * Start einer Uhr
    */
   public static void startClock() {
@@ -376,6 +366,18 @@ public class PicoIO {
   }
 
   /**
+   * Programm pausiert
+   * @param milliseconds Zeit in ms
+   */
+  public static void pause(int milliseconds) {
+    try {
+      Thread.sleep(milliseconds);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt(); // Interrupt-Status beibehalten
+    }
+  }
+
+  /**
    * Wiederholter Durchlauf einer Methode als Hintergrundprozess
    * @param object Objekt
    * @param methodName Name der Methode
@@ -403,12 +405,20 @@ public class PicoIO {
             try {
               java.lang.reflect.Method method = object.getClass().getDeclaredMethod(methodName);
               method.setAccessible(true); // Zugriff auf private Methoden erlauben
-              while (!Thread.currentThread().isInterrupted()) {
+              while (!Thread.currentThread().isInterrupted()) { // Korrekte Interrupt-Prüfung
                 method.invoke(object);
                 Thread.sleep(delay);
               }
+            } catch (InterruptedException e) {
+              System.out.println("Loop " + loopId + " wurde durch Interrupt beendet.");
+              Thread.currentThread().interrupt();
             } catch (Exception e) {
-              System.err.println("Fehler in Loop " + loopId + ": " + e.getMessage());
+              if (e.getCause() instanceof InterruptedException) { // Falls invoke() InterruptedException auslöst
+                System.out.println("Loop " + loopId + " wurde durch Methode unterbrochen.");
+                Thread.currentThread().interrupt();
+              } else {
+                System.err.println("Fehler in Loop " + loopId + ": " + e.getMessage());
+              }
             }
         });
     loops.put(loopId, thread);
@@ -422,15 +432,25 @@ public class PicoIO {
    * @param loopId Prozessnummer
    */
   public static void stopLoop(int loopId) {
-    Thread thread = loops.remove(loopId);
+    Thread thread = loops.get(loopId); // Thread nicht sofort entfernen
     if (thread != null) {
       thread.interrupt();
+      try {
+        thread.join(2000); // Max. 2 Sekunden warten, bis der Thread beendet ist
+        if (thread.isAlive()) {
+          System.err.println("⚠ Thread " + loopId + " wurde nicht korrekt beendet!");
+        }
+      } catch (InterruptedException e) {
+        System.err.println("Fehler beim Warten auf das Beenden des Loops: " + e.getMessage());
+        Thread.currentThread().interrupt();
+      }
+      loops.remove(loopId); // Immer aus der Map entfernen
       activeLoopIdentifiers.values().removeIf(id -> id == loopId);
     }
   }
 
   /**
-   * alle Hintergrundprozesse
+   * Alle Hintergrundprozesse beenden
    */
   public static void stopAllLoops() {
     Set<Integer> loopIds = new HashSet<>(loops.keySet());
