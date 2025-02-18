@@ -8,65 +8,53 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PicoIO {
   //Hardware
-  private static FirmataDevice device;
+  private FirmataDevice device;
 
   //globale Vereinbarungen
-  private static final int BUTTON_THRESHOLD = 500; // Schwellenwert fuer den analogen Button
-  private static final int MAGNETIC_THRESOLD = 533; // Normwert fuer den Magnetsensor
+  private final int BUTTON_THRESHOLD = 500; // Schwellenwert fuer den analogen Button
+  private final int MAGNETIC_THRESOLD = 533; // Normwert fuer den Magnetsensor
 
   //Ausgaben
-  private static final int[] ledPins = {16, 17, 18, 19, 20, 21, 22};
-  private static final int buzzerPin = 15;
+  private final int[] ledPins = {16, 17, 18, 19, 20, 21, 22};
+  private final int buzzerPin = 15;
 
   //Eingaben
-  private static final int buttonPin = 26;
-  private static final int hallSensorPin = 27;
-  private static final int lightSensorPin = 28;
+  private final int buttonPin = 26;
+  private final int hallSensorPin = 27;
+  private final int lightSensorPin = 28;
 
   //Status
-  private static boolean boardActive = false;
-  private static boolean wasPressed = false;
-  private static final ConcurrentHashMap<Integer, Thread> loops = new ConcurrentHashMap<>(); // Speichert die Loops
-  private static final Map<String, Integer> activeLoopIdentifiers = new HashMap<>();
-  private static int loopCounter = 0;
-  private static long startZeit;
+  private boolean boardActive = false;
+  private boolean wasPressed = false;
+  private final ConcurrentHashMap<Integer, Thread> loops = new ConcurrentHashMap<>(); // Speichert die Loops
+  private final Map<String, Integer> activeLoopIdentifiers = new HashMap<>();
+  private int loopCounter = 0;
+  private long startZeit;
 
-  // Statische Initialisierung anstelle des Konstruktors
-  static {
+  public PicoIO() {
     open();
     initializePins();
     close();
-  }
+  } 
 
   /**
    * Methode zum Verbinden mit dem PicoIO
-   * Falls Probleme: 3x Neustart der JVM
+   * Falls Probleme: 3x Neustart der JVM unter Windows
    */
-  public static void open() {
+  public void open() {
     if (device != null) {
       System.err.println("Pico ist bereits verbunden.");
       return;
     }
     String port = findPicoPort();
     if (port == null) {
-      restartJVM("Kein Raspberry Pi Pico gefunden!");
+      System.err.println("Kein Raspberry Pi Pico gefunden! Stellen Sie sicher, dass der Pico angeschlossen ist und checken Sie die Berechtigungen für serielle Ports.");
+      restartJVMIfWindows();
+      return;
     }
     device = new FirmataDevice(port);
-    int attempts = 3;
-    while (attempts > 0) {
-      try {
-        device.start();
-        break;
-      } catch (IOException e) {
-        attempts--;
-        System.err.println("Fehler beim Starten von Firmata. Verbleibende Versuche: " + attempts);
-        if (attempts == 0) {
-          restartJVM("Fehlgeschlagen nach 3 Versuchen.");
-        }
-      }
-    }
-
     try {
+      device.start();
       long startTime = System.currentTimeMillis();
       while (!device.isReady()) {
         if (System.currentTimeMillis() - startTime > 3000) {
@@ -75,21 +63,20 @@ public class PicoIO {
         Thread.sleep(100);
       }
     } catch (InterruptedException | IOException e) {
-      restartJVM("Fehler beim Warten auf Firmata.");
+      System.err.println("Fehler beim Starten von Firmata: " + e.getMessage());
+      restartJVMIfWindows();
+      return;
     }
-
     initializePins();
     boardActive = true;
     System.out.println("Pico verbunden auf: " + port);
-    startZeit = -1L;
-    // Starte den Hintergrund-Thread fuer die Taster-Abfrage
     startButtonMonitor();
   }
 
   /** 
    * Verbindung zu PicoIO beenden und alle Aktoren/Threads deaktivieren 
    */
-  public static void close() {
+  public void close() {
     if (device == null) {
       System.err.println("Kein Pico verbunden.");
       return;
@@ -106,7 +93,7 @@ public class PicoIO {
     }
   }
 
-  private static void startButtonMonitor() {
+  private void startButtonMonitor() {
     Thread buttonThread = new Thread(() -> {
             while (boardActive) {
               try {
@@ -123,19 +110,27 @@ public class PicoIO {
     buttonThread.start();
   }
 
-  private PicoIO() {} // Verhindert Instanziierung
 
-  private static String findPicoPort() {
+  private String findPicoPort() {
+    String os = System.getProperty("os.name").toLowerCase();
     SerialPort[] ports = SerialPort.getCommPorts();
     for (SerialPort port : ports) {
-      if (port.getPortDescription().toLowerCase().contains("pico")) {
-        return port.getSystemPortName();
+      String portDesc = port.getPortDescription().toLowerCase();
+      String portName = port.getSystemPortName();
+      if (os.contains("win")) {
+        if (portDesc.contains("pico")) {
+          return portName;
+        }
+      } else {
+        if (portDesc.contains("pico") || portName.matches(".*(ttyUSB|ttyACM|cu\\.usb).*")) {
+          return portName;
+        }
       }
     }
     return null;
   }
 
-  private static void initializePins() {
+  private void initializePins() {
     try {
       for (int pin : ledPins) {
         device.getPin(pin).setMode(Pin.Mode.PWM);
@@ -149,20 +144,22 @@ public class PicoIO {
     }
   }
 
-  private static void restartJVM(String reason) {
-    System.err.println("Fehler: " + reason + " - Neustart der JVM...");
-    try {
-      String javaBin = System.getProperty("java.home") + "/bin/java";
-      String[] command = {javaBin, "-cp", System.getProperty("java.class.path"), PicoIO.class.getName()};
-      new ProcessBuilder(command).start();
-      System.exit(0);
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.exit(1);
+  private void restartJVMIfWindows() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (os.contains("win")) {
+      try {
+        String javaBin = System.getProperty("java.home") + "/bin/java";
+        String[] command = {javaBin, "-cp", System.getProperty("java.class.path"), PicoIO.class.getName()};
+        new ProcessBuilder(command).start();
+        System.exit(0);
+      } catch (IOException e) {
+        e.printStackTrace();
+        System.exit(1);
+      }
     }
   }
 
-  private static boolean isValidLEDPin(int pin) {
+  private boolean isValidLEDPin(int pin) {
     for (int ledPin : ledPins) {
       if (ledPin == pin) return true;
     }
@@ -173,7 +170,7 @@ public class PicoIO {
    * Boardstatus abfragen
    * @return ture/false Board vorhanden/fehlt
    */
-  public static boolean getStatus() {
+  public boolean getStatus() {
     return boardActive;
   }
 
@@ -181,7 +178,7 @@ public class PicoIO {
    * LED einschalten
    * @param pin Nummer der LED (16..22)
    */
-  public static void ledOn(int pin){
+  public void ledOn(int pin){
     ledDim(pin, 255);
   }
 
@@ -189,7 +186,7 @@ public class PicoIO {
    * LED ausschalten
    * @param pin Nummer der LED (16..22)
    */
-  public static void ledOff(int pin)  {
+  public void ledOff(int pin)  {
     ledDim(pin, 0);
   }
 
@@ -197,7 +194,7 @@ public class PicoIO {
    * LED umschalten, falls Dimmung ausschalten
    * @param pin Nummer der LED (16..22)
    */
-  public static void ledSwitch(int pin) {
+  public void ledSwitch(int pin) {
     if (isValidLEDPin(pin)) {
       ledDim(pin, getLedValue(pin) == 0 ? 255 : 0); // Wechsel zum alten Wert
     }
@@ -208,7 +205,7 @@ public class PicoIO {
    * @param pin Nummer der LED (16..22)
    * @param state true/false  ein/aus
    */
-  public static void ledSet(int pin, boolean state)  {
+  public void ledSet(int pin, boolean state)  {
     ledDim(pin, state ? 255 : 0);
   }
 
@@ -217,7 +214,7 @@ public class PicoIO {
    * @param pin Nummer der LED (16..22)
    * @param value Helligkeit (0..255)
    */
-  public static void ledDim(int pin, int value) {
+  public void ledDim(int pin, int value) {
     try {
       if (isValidLEDPin(pin)) {
         device.getPin(pin).setValue(Math.max(0, Math.min(255, value)));
@@ -232,7 +229,7 @@ public class PicoIO {
    * @param pin Nummer der LED (16..22)
    * @return Helligkeitswert (0..255)
    */
-  public static int getLedValue(int pin) {
+  public int getLedValue(int pin) {
     return isValidLEDPin(pin) ? (int) device.getPin(pin).getValue() : -1;
   }
 
@@ -241,14 +238,14 @@ public class PicoIO {
    * @param pin Nummer der LED (16..22)
    * @return Zustand true/false ein/aus
    */
-  public static boolean getLedState(int pin) {
+  public boolean getLedState(int pin) {
     return getLedValue(pin) > 0;
   }
 
   /**
    * alle LEDs ausschalten
    */
-  public static void ledsOff()  {
+  public void ledsOff()  {
     for (int pin : ledPins) {
       ledOff(pin);
     }
@@ -258,7 +255,7 @@ public class PicoIO {
    * Abfrage Tasterzustand aktuell 
    * @return true/false geschlossen/offen
    */
-  public static boolean isPressed() {
+  public boolean isPressed() {
     return device.getPin(buttonPin).getValue() > BUTTON_THRESHOLD;
   }
 
@@ -266,7 +263,7 @@ public class PicoIO {
    * Abfrage Tasterzustand seit letzter Abfrage 
    * @return true/false geschlossen/offen
    */
-  public static boolean wasPressed() {
+  public boolean wasPressed() {
     boolean state = wasPressed;
     wasPressed = false;
     return state;
@@ -275,7 +272,7 @@ public class PicoIO {
   /**
    * Tasterzustand bereinigen
    */
-  public static void clearPressed() {
+  public void clearPressed() {
     wasPressed();
   }
 
@@ -283,7 +280,7 @@ public class PicoIO {
    * Abfrage Helligkeitssensor 
    * @return Helligkeit (0..1023)
    */
-  public static int getLight() {
+  public int getLight() {
     return (int) device.getPin(lightSensorPin).getValue();
   }
 
@@ -291,7 +288,7 @@ public class PicoIO {
    * Abfrage Hallssensor (Magnetfeld)
    * @return Hallwert (0..1023)
    */
-  public static int getHall()  {
+  public int getHall()  {
     return (int) device.getPin(hallSensorPin).getValue();
   }
 
@@ -299,7 +296,7 @@ public class PicoIO {
    * Abfrage Hallssensor (Magnetanwesenheit)
    * @return true/false Magnet/kein Magnet
    */
-  public static boolean isContacted()  {
+  public boolean isContacted()  {
     int e = getHall();
     return (e < MAGNETIC_THRESOLD-50 || e > MAGNETIC_THRESOLD+50);
   }
@@ -308,7 +305,7 @@ public class PicoIO {
    * Tonausgabe
    * @param duration Dauer in ms (max. 5 Sekunden)
    */
-  public static void playBeep(int duration)  {
+  public void playBeep(int duration)  {
     int pwmValue = 200; 
     if (duration > 5000 ||duration < 0){
       System.err.println("Fehler bei der Tonausgabe: Dauer zu lang");
@@ -327,7 +324,7 @@ public class PicoIO {
   /**
    * Tonausgabe stoppen
    */
-  public static void stopBeep()  {
+  public void stopBeep()  {
     try {
       device.getPin(buzzerPin).setValue(0);
     } catch (IOException e) {
@@ -338,7 +335,7 @@ public class PicoIO {
   /**
    * Start einer Uhr
    */
-  public static void startClock() {
+  public void startClock() {
     startZeit = System.nanoTime();
   }
 
@@ -346,7 +343,7 @@ public class PicoIO {
    * Abfrage Laufzeit der Uhr
    * @return Laufzeit
    */
-  public static long getClock() {
+  public long getClock() {
     if (startZeit == -1L) {
       System.out.println("Die Stoppuhr wurde nicht gestartet!");
       return 0L;
@@ -359,7 +356,7 @@ public class PicoIO {
    * Stoppen der Uhr und Abfrage der Laufzeit
    * @return Laufzeit
    */
-  public static long stopClock() {
+  public long stopClock() {
     long elapsedTime = getClock();
     startZeit = -1L; // Reset 
     return elapsedTime;
@@ -369,7 +366,7 @@ public class PicoIO {
    * Programm pausiert
    * @param milliseconds Zeit in ms
    */
-  public static void pause(int milliseconds) {
+  public void pause(int milliseconds) {
     try {
       Thread.sleep(milliseconds);
     } catch (InterruptedException e) {
@@ -383,7 +380,7 @@ public class PicoIO {
    * @param methodName Name der Methode
    * @return Prozessnummer
    */
-  public static int startLoop(Object object, String methodName) {
+  public int startLoop(Object object, String methodName) {
     return startLoopWithDelay(object, methodName, 0);
   }
 
@@ -394,7 +391,7 @@ public class PicoIO {
    * @param delay Zeitabstand
    * @return Prozessnummer
    */
-  public static int startLoopWithDelay(Object object, String methodName, int delay) {
+  public int startLoopWithDelay(Object object, String methodName, int delay) {
     String loopKey = object.getClass().getName() + "#" + methodName;
     if (activeLoopIdentifiers.containsKey(loopKey)) {
       System.err.println("Loop der Methode " + loopKey + " bereits aktiv - kein erneuter Start!");
@@ -431,7 +428,7 @@ public class PicoIO {
    * Hintergrundprozess beenden
    * @param loopId Prozessnummer
    */
-  public static void stopLoop(int loopId) {
+  public void stopLoop(int loopId) {
     Thread thread = loops.get(loopId); // Thread nicht sofort entfernen
     if (thread != null) {
       thread.interrupt();
@@ -452,7 +449,7 @@ public class PicoIO {
   /**
    * Alle Hintergrundprozesse beenden
    */
-  public static void stopAllLoops() {
+  public void stopAllLoops() {
     Set<Integer> loopIds = new HashSet<>(loops.keySet());
     for (int loopId : loopIds) {
       stopLoop(loopId);
@@ -464,7 +461,7 @@ public class PicoIO {
   /**
    * Ausgabe der Hintergrundprozessnummern auf Konsole
    */
-  public static void listLoops() {
+  public void listLoops() {
     System.out.println("Aktive Loops: " + loops.keySet());
   }
 
