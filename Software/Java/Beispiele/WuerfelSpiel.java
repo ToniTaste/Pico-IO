@@ -4,13 +4,14 @@ public class WuerfelSpiel {
   private int THRESHOLD_LIGHT = 800;
   private int HALL_STANDARD = 533;
   private int loopID;
+  private PicoIO pico;
 
   public WuerfelSpiel() {
-    PicoIO.open();
+    pico = new PicoIO();
     loopID = -1;
   }
 
-  private static void displayDice(int number) {
+  private void displayDice(int number) {
     int[][] ledPatterns = {
         {0, 0, 0, 0, 0, 0, 0},  // 0
         {0, 0, 0, 1, 0, 0, 0},  // 1
@@ -23,42 +24,46 @@ public class WuerfelSpiel {
 
     int[] pattern = ledPatterns[number];
     for (int i = 0; i < pattern.length; i++) {
-      PicoIO.ledSet(16 + i, pattern[i] == 1);
+      pico.ledSet(16 + i, pattern[i] == 1);
     }
   }
 
   private void loop(){
-    int lightValue = PicoIO.getLight();
+    int lightValue = pico.getLight();
     if (lightValue > THRESHOLD_LIGHT) {
-      PicoIO.playBeep(200);
-      PicoIO.pause(500);
-    } else if (PicoIO.isPressed()) {
-      int hallValue = PicoIO.getHall();
+      pico.playBeep(200);
+      pico.pause(500);
+    } else if (pico.isPressed()) {
+      int hallValue = pico.getHall();
       if (hallValue < HALL_STANDARD * 0.9 || hallValue > HALL_STANDARD * 1.1) {
         displayDice(6);
       } else {
         int number = (int) (6 * Math.random() + 1);
         displayDice(number);
       }
-      PicoIO.pause(1000);
+      pico.pause(1000);
       displayDice(0);
     }
   }
 
   public void starten(){
-    loopID = PicoIO.startLoop(this,"loop");  
-
+    if (loopID == -1){
+      pico.open();
+      loopID = pico.startLoop(this,"loop");
+    }  
+    else{
+      System.out.println("Loop bereits gestartet)");
+    }
   }
 
   public void stopp(){
     if (loopID != -1){
-      PicoIO.stopLoop(loopID);
+      pico.stopLoop(loopID);
       loopID = -1;
+      pico.ledsOff();
+      pico.close();
     }
-    PicoIO.ledsOff();
+
   }
 
-  public void beenden(){
-    PicoIO.close();
-  }
 }

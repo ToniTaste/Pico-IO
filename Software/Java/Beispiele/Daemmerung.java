@@ -10,26 +10,25 @@ public class Daemmerung {
   
   public static void main(String[] args) {
   
-    PicoIO.open();
+    PicoIO pico = new PicoIO();
+    pico.open();
     int normwert = 500;
     
-    while (!PicoIO.wasPressed()) { 
+    while (!pico.wasPressed()) { 
       
-      int messwert = PicoIO.getLight();
-
+      int messwert = pico.getLight();
       int differenz = messwert - normwert;
 
       if (differenz < -200) {
-        PicoIO.ledOn(19);
+        pico.ledOn(19);
       } else if (differenz > 200){
-        PicoIO.ledOff(19);
+        pico.ledOff(19);
       }
       else{
-        PicoIO.ledDim(19,(int) 255-(differenz+200)*255/400);
+        pico.ledDim(19,(int) 255-(differenz+200)*255/400);
       }
-      PicoIO.pause(100);
     }
-    PicoIO.close();
+    pico.close();
   }
 
 }

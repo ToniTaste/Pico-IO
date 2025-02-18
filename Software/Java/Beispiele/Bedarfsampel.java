@@ -12,76 +12,81 @@ public class Bedarfsampel{
   private int s_gruen = 18;
   private int f_rot = 20;
   private int f_gruen = 22;
-  private int lID;
-
+  private int loopID;
+  private PicoIO pico;
 
   /**
    * Konstruktor für Objekte der Klasse Bedarfsampel
    */
   public Bedarfsampel(){
-    lID = -1;
+    pico = new PicoIO();
+    loopID = -1;
   }
 
   public void start(){
-    PicoIO.open();
-    PicoIO.clearPressed();
-    PicoIO.ledOn(s_gruen);
-    PicoIO.ledOn(f_rot);
-    lID = PicoIO.startLoop(this,"loop");   
+    if (loopID == -1){
+      pico.open();
+      pico.clearPressed();
+      pico.ledOn(s_gruen);
+      pico.ledOn(f_rot);
+      loopID = pico.startLoop(this,"loop");   
+    }  
+    else{
+      System.out.println("Loop bereits gestartet");
+    }
+
   }
 
   private void loop(){
-    if (PicoIO.wasPressed()){
+    if (pico.wasPressed()){
       schaltePhase();
     }
   }
-  
-  public void stopp(){
-    if (lID != -1){
-      PicoIO.stopLoop(lID);
-      lID = -1;
-    }
-    PicoIO.ledsOff();
-  }
-  
-  public void beenden(){
-    PicoIO.close();
-  }
-  private void schaltePhase() {
 
+  public void stopp(){
+    if (loopID != -1){
+      pico.stopLoop(loopID);
+      loopID = -1;
+      pico.ledsOff();
+      pico.close();
+    }
+
+  }
+
+  private void schaltePhase() {
     //Phase 1: Warte, dann: Seite – Rot aus, Gelb an, Grün aus
-    PicoIO.pause(500);
-    PicoIO.ledOn(s_gelb);
-    PicoIO.ledOff(s_gruen);
+    pico.pause(500);
+    pico.ledOn(s_gelb);
+    pico.ledOff(s_gruen);
 
     // Phase 2: Warte, dann: Seite – Rot an, Gelb aus, Grün aus
-    PicoIO.pause(1000);
-    PicoIO.ledOn(s_rot);
-    PicoIO.ledOff(s_gelb);
+    pico.pause(1000);
+    pico.ledOn(s_rot);
+    pico.ledOff(s_gelb);
 
     // Phase 3: Warte, dann: Fußgänger – Rot aus, Grün an
-    PicoIO.pause(500);
-    PicoIO.ledOff(f_rot);
-    PicoIO.ledOn(f_gruen);
+    pico.pause(500);
+    pico.ledOff(f_rot);
+    pico.ledOn(f_gruen);
 
     // Phase 4: Warte, dann: Fußgänger – Rot an, Grün aus
-    PicoIO.pause(4000);
-    PicoIO.ledOn(f_rot);
-    PicoIO.ledOff(f_gruen);
-    PicoIO.clearPressed();
-    
+    pico.pause(4000);
+    pico.ledOn(f_rot);
+    pico.ledOff(f_gruen);
+    pico.clearPressed();
+
     // Phase 5: Warte, dann: Seite – Rot und Gelb an, Grün aus
-    PicoIO.pause(500);
-    PicoIO.ledOn(s_gelb);
+    pico.pause(500);
+    pico.ledOn(s_gelb);
 
     // Phase 6: Warte, dann: Seite – Rot und Gelb aus, Grün an
-    PicoIO.pause(500);
-    PicoIO.ledOff(s_rot);
-    PicoIO.ledOff(s_gelb);
-    PicoIO.ledOn(s_gruen);
+    pico.pause(500);
+    pico.ledOff(s_rot);
+    pico.ledOff(s_gelb);
+    pico.ledOn(s_gruen);
 
     // Abschließende Pause
-    PicoIO.pause(2000);
+    pico.pause(2000);
 
   }
 
