@@ -282,10 +282,9 @@ Port zu wählen.
 
 ![](Abb/image036.png)
 
-## Textbasierte Programmierung mit Java mind. Version 17 in BlueJ oder JavaEditor (unter Windows)
+## Textbasierte Programmierung mit Java mind. Version 17 (unter Windows/Linux/macOS) beispielsweise mit BlueJ
 
-Pico-IO benötigt eine [Firmware](Software/Java/Firmata), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten
-Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
+Pico-IO benötigt eine [Firmware](Software/Java/Firmata), die mittels Arduino aus der Standard-Firmata generiert wurde. Diese ist vor der ersten Verwendung auf dem Pico zu installieren. Während des Anschlusses an einen Computer muss die Taste BOOTSEL gedrückt werden. Der Pico erscheint dann als USB-Massenspeicher. Nun wird die PicoIO.uf2-Datei auf das Laufwerk kopiert. Nach einem Neustart des Pico blinkt die Onboard-LED mehrfach und das System ist bereit. 
 
 ![](Abb/bluej.png)
 
