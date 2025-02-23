@@ -1,7 +1,9 @@
+
+import jssc.SerialPort;
+import jssc.SerialPortList;
 import org.firmata4j.firmata.FirmataDevice;
-import org.firmata4j.IODevice;
+//import org.firmata4j.IODevice;
 import org.firmata4j.Pin;
-import com.fazecast.jSerialComm.SerialPort;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,7 +37,7 @@ public class PicoIO {
     open();
     initializePins();
     close();
-  } 
+  }
 
   /**
    * Methode zum Verbinden mit dem PicoIO
@@ -46,7 +48,7 @@ public class PicoIO {
       System.err.println("Pico ist bereits verbunden.");
       return;
     }
-    String port = findPicoPort();
+    String port = findePicoPort();
     if (port == null) {
       System.err.println("Kein Raspberry Pi Pico gefunden! Stellen Sie sicher, dass der Pico angeschlossen ist und checken Sie die Berechtigungen für serielle Ports.");
       restartJVMIfWindows();
@@ -73,8 +75,8 @@ public class PicoIO {
     startButtonMonitor();
   }
 
-  /** 
-   * Verbindung zu PicoIO beenden und alle Aktoren/Threads deaktivieren 
+  /**
+   * Verbindung zu PicoIO beenden und alle Aktoren/Threads deaktivieren
    */
   public void close() {
     if (device == null) {
@@ -110,24 +112,73 @@ public class PicoIO {
     buttonThread.start();
   }
 
+  // private String findePicoPort() {
+  // String os = System.getProperty("os.name").toLowerCase();
+  // String[] ports = SerialPortList.getPortNames();
 
-  private String findPicoPort() {
+  // for (String portName : ports) {
+  // if (os.contains("win")) {
+  // if (portName.toLowerCase().contains("com")) {
+  // return portName;
+  // }
+  // } else {
+  // if (portName.matches(".*(ttyUSB|ttyACM|cu\\.usb).*")) {
+  // return portName;
+  // }
+  // }
+  // }
+
+  // return null;
+  // }
+
+  public String findePicoPort() {
     String os = System.getProperty("os.name").toLowerCase();
-    SerialPort[] ports = SerialPort.getCommPorts();
-    for (SerialPort port : ports) {
-      String portDesc = port.getPortDescription().toLowerCase();
-      String portName = port.getSystemPortName();
+    String[] ports = SerialPortList.getPortNames();
+
+    for (String portName : ports) {
+      boolean isPotentialPico = false;
+
       if (os.contains("win")) {
-        if (portDesc.contains("pico")) {
-          return portName;
-        }
+        isPotentialPico = portName.toLowerCase().contains("com"); // Windows erkennt COM-Ports
       } else {
-        if (portDesc.contains("pico") || portName.matches(".*(ttyUSB|ttyACM|cu\\.usb).*")) {
+        isPotentialPico = portName.matches(".*(ttyUSB|ttyACM|cu\\.usb).*"); // Linux/macOS-Ports
+      }
+
+      if (isPotentialPico) {
+        System.out.println("Teste Port: " + portName);
+        if (isPicoDevice(portName)) {
           return portName;
         }
       }
     }
-    return null;
+    return null; // Kein Pico gefunden
+  }
+
+  private boolean isPicoDevice(String portName) {
+    SerialPort port = new SerialPort(portName);
+    try {
+      port.openPort();
+      port.setParams(57600, 8, 1, 0); // Standard-Firmata-Einstellungen
+
+      // Firmata sendet "REPORT_VERSION" (0xF9)
+      port.writeBytes(new byte[]{(byte) 0xF9});
+      Thread.sleep(500);  // Warte auf Antwort
+
+      byte[] buffer = port.readBytes();
+      port.closePort();
+
+      if (buffer != null && buffer.length > 0) {
+        System.out.print("Antwort von " + portName + ": ");
+        for (byte b : buffer) {
+          System.out.print(String.format("0x%02X ", b));
+        }
+        System.out.println();
+        return buffer[0] == (byte) 0xF9; // Prüft, ob Firmata-Version zurückkommt
+      }
+    } catch (Exception e) {
+      System.err.println("Fehler beim Testen von " + portName + ": " + e.getMessage());
+    }
+    return false;
   }
 
   private void initializePins() {
@@ -166,7 +217,7 @@ public class PicoIO {
     return false;
   }
 
-  /** 
+  /**
    * Boardstatus abfragen
    * @return ture/false Board vorhanden/fehlt
    */
@@ -249,10 +300,10 @@ public class PicoIO {
     for (int pin : ledPins) {
       ledOff(pin);
     }
-  } 
+  }
 
   /**
-   * Abfrage Tasterzustand aktuell 
+   * Abfrage Tasterzustand aktuell
    * @return true/false geschlossen/offen
    */
   public boolean isPressed() {
@@ -260,7 +311,7 @@ public class PicoIO {
   }
 
   /**
-   * Abfrage Tasterzustand seit letzter Abfrage 
+   * Abfrage Tasterzustand seit letzter Abfrage
    * @return true/false geschlossen/offen
    */
   public boolean wasPressed() {
@@ -277,7 +328,7 @@ public class PicoIO {
   }
 
   /**
-   * Abfrage Helligkeitssensor 
+   * Abfrage Helligkeitssensor
    * @return Helligkeit (0..1023)
    */
   public int getLight() {
@@ -306,7 +357,7 @@ public class PicoIO {
    * @param duration Dauer in ms (max. 5 Sekunden)
    */
   public void playBeep(int duration)  {
-    int pwmValue = 200; 
+    int pwmValue = 200;
     if (duration > 5000 ||duration < 0){
       System.err.println("Fehler bei der Tonausgabe: Dauer zu lang");
     }
@@ -358,7 +409,7 @@ public class PicoIO {
    */
   public long stopClock() {
     long elapsedTime = getClock();
-    startZeit = -1L; // Reset 
+    startZeit = -1L; // Reset
     return elapsedTime;
   }
 
